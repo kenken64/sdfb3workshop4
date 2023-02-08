@@ -13,8 +13,9 @@ public class ServerApp {
             port= Integer.parseInt(args[0]);
         }
         String cookieFile = args[1];
-        ExecutorService threadPool = Executors.newFixedThreadPool(2);
+        ExecutorService threadPool = Executors.newFixedThreadPool(3);
         ServerSocket server = new ServerSocket(port);
+        System.out.printf("Cookie Server started %s", port);
         while(true){
             Socket sock = server.accept();
             CookieClientHandler cch = 
