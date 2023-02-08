@@ -12,19 +12,21 @@ import sg.edu.nus.iss.app.server.Cookie;
 
 /**
  * Unit test for simple App.
+ * export COOKIEFILE_PATH=/Users/kennethphang/Projects/sdfb3workshop6/cookie_file.txt
  */
 public class AppTest 
 {
     private List<String> cookies = null;
-    private static final String COOKIE_FILENAME =
-    "/Users/kennethphang/Projects/sdfb3workshop6/" + 
-            "cookie_file.txt";
+    private String cookieFilePathI  = null;
     /**
      * Rigorous Test :-)
      */
     @Before
     public void init() throws IOException{
-        cookies =Cookie.getDataFromText(COOKIE_FILENAME);
+        String cookieFilePath = System.getenv("COOKIEFILE_PATH");
+        System.out.println(">>> >" +cookieFilePath);
+        this.cookieFilePathI = cookieFilePath;
+        cookies =Cookie.getDataFromText(cookieFilePathI);
     }
 
     @Test 
@@ -44,7 +46,7 @@ public class AppTest
 
     @Test
     public void testCookieRandomName(){
-        String cookieName= Cookie.getRandomCookie(COOKIE_FILENAME);
+        String cookieName= Cookie.getRandomCookie(cookieFilePathI);
         assertTrue(cookieName.length() >= 4);
     }
 }
